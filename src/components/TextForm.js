@@ -18,10 +18,23 @@ export default function TextForm(props) {
     setText("");
   }
   const handleCapWordClick = () => {
-    const newText = text.split("");
-    newText.map()
-    setText(newText);
+    let newText = text.split(" ")
+    const newArray = newText.map((word)=>(
+      word.charAt(0).toUpperCase()+word.substring(1).toLowerCase()
+    ))
+    newText = newArray.join(" ")
+    setText(newText)
   }
+  const handleCopy = () => {
+    var text = document.getElementById("myBox");
+    text.select();
+    navigator.clipboard.writeText(text.value);
+  }
+  const handleExtraSpaces = () => {
+    let newText = text.split(/[ ]+/);
+    setText(newText.join(" "));
+  }
+
   const [text,setText] = useState('Enter text here');
   return (
     <>
@@ -34,12 +47,16 @@ export default function TextForm(props) {
         <button className="btn btn-primary mx-1" onClick={handleUpClick} >Convert to Uppercase</button>
         <button className="btn btn-primary mx-1" onClick={handleLowClick}>Convert to LowerCase</button>
         <button className="btn btn-primary mx-1" onClick={handleClearClick}>Clear</button>
-        <button className="btn btn-primary mx-3" onClick={handleCapWordClick}>Capatilize Words</button>
+        <button className="btn btn-primary mx-1" onClick={handleCapWordClick}>Capatilize Words</button>
+        <button className="btn btn-primary mx-1" onClick={handleCopy}>Copy Text</button>
+        <button className="btn btn-primary mx-1" onClick={handleExtraSpaces}>Remove Extra Spaces</button>
+
+
     </div>
     <div className="container my-3">
       <h2>Your Text Summary</h2>
-      <p>{text.split(" ").length} words and {text.length} characters </p>
-      <p>{0.008 * text.split(" ").length} mins read</p>
+      <p>{text.toString().split(" ").length} words and {text.length} characters </p>
+      <p>{0.008 * text.toString().split("").length} mins read</p>
       <h2>Preview</h2>
       <p>{text}</p>
     </div>
