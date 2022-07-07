@@ -39,10 +39,10 @@ export default function TextForm(props) {
   return (
     <>
     
-    <div className='container'>
+    <div className='container' style={{color :props.mode==='dark'?'white':'black'}}>
         <h1>{props.heading}</h1>
         <div className="mb-3">
-            <textarea className="form-control" value={text} onChange={handleOnChange} id="myBox" rows="6"></textarea>
+            <textarea className="form-control" value={text} onChange={handleOnChange} style={{background: props.mode ==='dark'?'#3F4E4F':'white',color :props.mode==='dark'?'white':'black'}} id="myBox" rows="6"></textarea>
         </div>
         <button className="btn btn-primary mx-1" onClick={handleUpClick} >Convert to Uppercase</button>
         <button className="btn btn-primary mx-1" onClick={handleLowClick}>Convert to LowerCase</button>
@@ -53,12 +53,12 @@ export default function TextForm(props) {
 
 
     </div>
-    <div className="container my-3">
+    <div className="container my-3" style={{color :props.mode==='dark'?'white':'black'}}>
       <h2>Your Text Summary</h2>
       <p>{text.toString().split(" ").length} words and {text.length} characters </p>
       <p>{0.008 * text.toString().split("").length} mins read</p>
       <h2>Preview</h2>
-      <p>{text}</p>
+      <p>{text.length>0?text:'Enter the text above to preview here'}</p>
     </div>
     </>
   )
