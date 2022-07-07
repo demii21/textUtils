@@ -6,6 +6,7 @@ export default function TextForm(props) {
   const handleUpClick = () =>{
     // console.log("Uppercase was clicked" +text);
     setText((text.toUpperCase()));
+    props.showAlert(": UpperCase! ","success ");
   }
   const handleOnChange = (event) => {
     // console.log("Handle on change");
@@ -13,22 +14,30 @@ export default function TextForm(props) {
   }
   const handleLowClick = () => {
     setText((text.toLowerCase()));
+    props.showAlert(": LowerCase! ","success ");
+
   }
   const handleClearClick = () => {
     setText("");
+    props.showAlert(": Cleared! ","success ");
+
   }
   const handleCapWordClick = () => {
     let newText = text.split(" ")
     const newArray = newText.map((word)=>(
       word.charAt(0).toUpperCase()+word.substring(1).toLowerCase()
     ))
-    newText = newArray.join(" ")
-    setText(newText)
+    newText = newArray.join(" ");
+    setText(newText);
+    props.showAlert(": Capatilized first letter of each word! ","success ");
+
   }
   const handleCopy = () => {
     var text = document.getElementById("myBox");
     text.select();
     navigator.clipboard.writeText(text.value);
+    props.showAlert(": Coppied text to clipboard ","success ");
+
   }
   const handleExtraSpaces = () => {
     let newText = text.split(/[ ]+/);
